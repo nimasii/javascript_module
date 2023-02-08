@@ -20,6 +20,9 @@
 
 {Make a list of websites that you found helpful in this project}
 
+- [24 JavaScript Projects For Beginners](https://mikkegoes.com/javascript-projects-for-beginners/)
+- [What is JavaScript?](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+- [Web Site Name](http://url.link.goes.here)
 - [Web Site Name](http://url.link.goes.here)
 - [Web Site Name](http://url.link.goes.here)
 
