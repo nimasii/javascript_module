@@ -22,8 +22,8 @@
 
 - [24 JavaScript Projects For Beginners](https://mikkegoes.com/javascript-projects-for-beginners/)
 - [What is JavaScript?](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [W3 Schools](https://www.w3schools.com/graphics/game_obstacles.asp)
+- [Javapoint](https://www.javatpoint.com/es6-arrow-function)
 - [Web Site Name](http://url.link.goes.here)
 
 # Future Work
