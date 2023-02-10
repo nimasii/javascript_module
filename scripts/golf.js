@@ -6,8 +6,8 @@ function startGame() {
     myGameArea.start();
     ball = new component(20, 20, 'white', 10, 240)
     hole = new component(30, 30, 'green', 950, 240)
-    wall = new component(100, 300, 'grey', 500, 0)
-    power = new component(200, 50, 'grey', 800, 450)
+    wall = new component(100, 300, 'black', 500, 0)
+    power = new component(200, 50, 'black', 800, 450)
     slide = new component(2, 49, 'blue', 801, 451)
 }
 
