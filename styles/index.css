@@ -2,3 +2,7 @@ canvas {
     border: 1px solid #d3d3d3;
     background-color: #777777;
 }
+
+body {
+    text-align: center;
+}

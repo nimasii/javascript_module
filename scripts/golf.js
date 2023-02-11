@@ -62,11 +62,11 @@ function component(width, height, color, x, y) {
         }
     }
     this.newPos = function() {
-        if (shoot == true && ball.speedX > 0) {
+        if (shoot == true && this.speedX > 0) {
             this.x += this.speedX;
             this.speedX -= .2;
-            if (this.x < 0) {
-                this.x = 0;
+            if (this.speedX < 0) {
+                this.speedX = 0;
             }
         } else {
             shoot = false
@@ -88,8 +88,10 @@ function updateGameArea() {
 }
 
 function takeShot() {
-    ball.speedX += size / 10; 
-    shoot = true;
+    if (ball.speedX == 0) {
+        ball.speedX += size / 10; 
+        shoot = true;
+    } 
 }
 
 document.addEventListener('keypress', event => {
