@@ -64,8 +64,9 @@ function component(width, height, color, x, y) {
         }
     }
     this.newPos = function() {
-        if (shoot == true && (this.speedX > 0.3 || this.speedX < 0.2)) {
+        if (shoot == true && (this.speedX > 0.3 || this.speedX < 0.2) && (this.speedY > 0.3 || this.speedY < 0.2)) {
             this.x += this.speedX;
+            this.y += this.speedY
             if (this.speedX > 0) {
                 this.speedX -= .2;
             } else if (this.speedX < 0) {
@@ -73,9 +74,17 @@ function component(width, height, color, x, y) {
             } else {
                 this.speedX = 0;
             }
+            if (this.speedY > 0) {
+                this.speedY -= .2;
+            } else if (this.speedY < 0) {
+                this.speedY += .3;
+            } else {
+                this.speedY = 0;
+            }
         } else {
             shoot = false
-            this.speedX =0;
+            this.speedX = 0;
+            this.speedY = 0;
         }
     }
     this.collide = function(wall) {
@@ -97,16 +106,16 @@ function component(width, height, color, x, y) {
     this.boundary = function(wall) {
         var ballLeft = this.x;
         var ballRight = this. x + this.width;
-        var ballTop = this.y + this.height;
-        var ballBottom = this.y;
-        var wallLeft = 0 + this.width;
+        var ballTop = this.y;
+        var ballBottom = this.y + this.height;
+        var wallLeft = 0;
         var wallRight = wall.width;
         var wallTop = wall.height;
-        var wallBottom = 0 + this.width;
-        var crash = true;
+        var wallBottom = 0 ;
+        var crash = false;
 
-        if ((ballBottom > wallTop) || (ballTop < wallBottom) || (ballRight > wallLeft) || (ballLeft < wallRight)) {
-            crash = false;
+        if (ballLeft < wallLeft || ballRight > wallRight || ballTop > wallTop || ballBottom < wallBottom) {
+            crash = true;
         } 
         return crash;
     }
@@ -131,8 +140,15 @@ function updateGameArea() {
 }
 
 function takeShot() {
-    if (ball.speedX == 0) {
-        ball.speedX += size / 10; 
+    if (ball.speedX == 0 && ball.speedY == 0) {
+        ball.speedX += size / (Math.random() * 10 + 10); 
+        if (Math.random() < .5) {
+            ball.speedX *= -1;
+        }
+        ball.speedY += size / (Math.random() * 10 + 10); 
+        if (Math.random() < .5) {
+            ball.speedY *= -1;
+        }
         shoot = true;
     } 
 }
