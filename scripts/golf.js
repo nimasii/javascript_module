@@ -9,7 +9,6 @@ function startGame() {
     wall = new component(100, 300, 'black', 500, 0)
     power = new component(200, 50, 'black', 800, 450)
     slide = new component(2, 49, 'blue', 801, 451)
-    aim = new component (5, 100, 'white', (ball.x + 7.5), (ball.y + 10))
 }
 
 var myGameArea = {
@@ -90,44 +89,39 @@ function component(width, height, color, x, y) {
     this.collide = function(wall) {
         var ballLeft = this.x;
         var ballRight = this. x + this.width;
-        var ballTop = this.y + this.height;
-        var ballBottom = this.y;
-        var wallLeft = wall.x;
-        var wallRight = wall.x + wall.width;
-        var wallTop = wall.y;
-        var wallBottom = wall.y + wall.height;
-        var crash = true;
-
-        if ((ballBottom < wallTop) || (ballTop > wallBottom) || (ballRight < wallLeft) || (ballLeft > wallRight)) {
-            crash = false;
-        } 
-        return crash;
-    }
-    this.boundary = function(wall) {
-        var ballLeft = this.x;
-        var ballRight = this. x + this.width;
         var ballTop = this.y;
         var ballBottom = this.y + this.height;
-        var wallLeft = 0;
-        var wallRight = wall.width;
-        var wallTop = wall.height;
-        var wallBottom = 0 ;
-        var crash = false;
+        var wallLeft = wall.x;
+        var wallRight = wall.x + wall.width;
+        var wallBottom = wall.y + wall.height;
+        var boundaryLeft = 0;
+        var boundaryRight = 1000;
+        var boundaryTop = 0;
+        var boundaryBottom = 500;
 
-        if (ballLeft < wallLeft || ballRight > wallRight || ballTop > wallTop || ballBottom < wallBottom) {
-            crash = true;
-        } 
-        return crash;
+        if (ballBottom > boundaryBottom || ballTop < boundaryTop) {
+            return 1;
+        } else if (ballLeft < boundaryLeft || ballRight > boundaryRight) {
+            return 2;
+        } else if (ballTop < wallBottom && ballRight > wallLeft && ballLeft < wallRight) {
+            if (ballTop > 299) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } else {
+            return 0;
+        }
     }
   }
 
 function updateGameArea() {
     myGameArea.clear();
-    if (ball.collide(wall) || ball.boundary(myGameArea)) {
-        ball.speedX = ball.speedX * -1;
+    if (ball.collide(wall) == 1) {
         ball.speedY = ball.speedY * -1;
-    }
-    if (ball.collide(hole)) {
+    } else if (ball.collide(wall) == 2) {
+        ball.speedX = ball.speedX * -1;
+    } else if (ball.collide(hole)) {
         console.log('You Win!')
     }
     ball.newPos();
@@ -136,7 +130,6 @@ function updateGameArea() {
     wall.update();
     power.update();
     slide.slideUpdate();
-    aim.update();
 }
 
 function takeShot() {
@@ -157,4 +150,4 @@ document.addEventListener('keypress', event => {
     if (event.code == 'Space') {
       takeShot();
     }
-  })
+})
