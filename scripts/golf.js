@@ -1,11 +1,14 @@
 var increasing = true;
 var size = 1;
 var shoot = false;
+var start = false;
+
+//$(document).ready(startGame());
 
 function startGame() {
     myGameArea.start();
     ball = new component(20, 20, 'white', 10, 240)
-    hole = new component(30, 30, 'green', 950, 240)
+    hole = new component(30, 500, 'green', 970, 0)
     wall = new component(100, 300, 'black', 500, 0)
     power = new component(200, 50, 'black', 800, 450)
     slide = new component(2, 49, 'blue', 801, 451)
@@ -94,6 +97,7 @@ function component(width, height, color, x, y) {
         var wallLeft = wall.x;
         var wallRight = wall.x + wall.width;
         var wallBottom = wall.y + wall.height;
+        var wallTop = wall.y
         var boundaryLeft = 0;
         var boundaryRight = 1000;
         var boundaryTop = 0;
@@ -116,20 +120,20 @@ function component(width, height, color, x, y) {
   }
 
 function updateGameArea() {
-    myGameArea.clear();
-    if (ball.collide(wall) == 1) {
-        ball.speedY = ball.speedY * -1;
-    } else if (ball.collide(wall) == 2) {
-        ball.speedX = ball.speedX * -1;
-    } else if (ball.collide(hole)) {
-        console.log('You Win!')
-    }
-    ball.newPos();
-    ball.update();
-    hole.update();
-    wall.update();
-    power.update();
-    slide.slideUpdate();
+        myGameArea.clear();
+        if (ball.collide(wall) == 1) {
+            ball.speedY = ball.speedY * -1;
+        } else if (ball.collide(wall) == 2) {
+            ball.speedX = ball.speedX * -1;
+        } else if (ball.collide(hole) == 1 || ball.collide(hole) == 2) {
+            alert("You Win!");
+        }
+        ball.newPos();
+        ball.update();
+        hole.update();
+        wall.update();
+        power.update();
+        slide.slideUpdate();
 }
 
 function takeShot() {
